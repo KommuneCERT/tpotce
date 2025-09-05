@@ -59,22 +59,22 @@ services:
 ##################
 
 # Adbhoney service
-  adbhoney:
-    container_name: adbhoney
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    networks:
-     - adbhoney_local
-    ports:
-     - "5555:5555"
-    image: ${TPOT_REPO}/adbhoney:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-     - ${TPOT_DATA_PATH}/adbhoney/log:/opt/adbhoney/log
-     - ${TPOT_DATA_PATH}/adbhoney/downloads:/opt/adbhoney/dl
+  # adbhoney:
+  #   container_name: adbhoney
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   networks:
+  #    - adbhoney_local
+  #   ports:
+  #    - "5555:5555"
+  #   image: ${TPOT_REPO}/adbhoney:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}/adbhoney/log:/opt/adbhoney/log
+  #    - ${TPOT_DATA_PATH}/adbhoney/downloads:/opt/adbhoney/dl
 
 # Ciscoasa service
   ciscoasa:
@@ -97,106 +97,106 @@ services:
      - ${TPOT_DATA_PATH}/ciscoasa/log:/var/log/ciscoasa
 
 # Conpot IEC104 service
-  conpot_IEC104:
-    container_name: conpot_iec104
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    environment:
-     - CONPOT_CONFIG=/etc/conpot/conpot.cfg
-     - CONPOT_JSON_LOG=/var/log/conpot/conpot_IEC104.json
-     - CONPOT_LOG=/var/log/conpot/conpot_IEC104.log
-     - CONPOT_TEMPLATE=IEC104
-     - CONPOT_TMP=/tmp/conpot
-    tmpfs:
-     - /tmp/conpot:uid=2000,gid=2000
-    networks:
-     - conpot_local_IEC104
-    ports:
-     - "161:161/udp"
-     - "2404:2404"
-    image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-     - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
+  # conpot_IEC104:
+  #   container_name: conpot_iec104
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   environment:
+  #    - CONPOT_CONFIG=/etc/conpot/conpot.cfg
+  #    - CONPOT_JSON_LOG=/var/log/conpot/conpot_IEC104.json
+  #    - CONPOT_LOG=/var/log/conpot/conpot_IEC104.log
+  #    - CONPOT_TEMPLATE=IEC104
+  #    - CONPOT_TMP=/tmp/conpot
+  #   tmpfs:
+  #    - /tmp/conpot:uid=2000,gid=2000
+  #   networks:
+  #    - conpot_local_IEC104
+  #   ports:
+  #    - "161:161/udp"
+  #    - "2404:2404"
+  #   image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
 
 # Conpot guardian_ast service
-  conpot_guardian_ast:
-    container_name: conpot_guardian_ast
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    environment:
-     - CONPOT_CONFIG=/etc/conpot/conpot.cfg
-     - CONPOT_JSON_LOG=/var/log/conpot/conpot_guardian_ast.json
-     - CONPOT_LOG=/var/log/conpot/conpot_guardian_ast.log
-     - CONPOT_TEMPLATE=guardian_ast
-     - CONPOT_TMP=/tmp/conpot
-    tmpfs:
-     - /tmp/conpot:uid=2000,gid=2000
-    networks:
-     - conpot_local_guardian_ast
-    ports:
-     - "10001:10001"
-    image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-     - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
+  # conpot_guardian_ast:
+  #   container_name: conpot_guardian_ast
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   environment:
+  #    - CONPOT_CONFIG=/etc/conpot/conpot.cfg
+  #    - CONPOT_JSON_LOG=/var/log/conpot/conpot_guardian_ast.json
+  #    - CONPOT_LOG=/var/log/conpot/conpot_guardian_ast.log
+  #    - CONPOT_TEMPLATE=guardian_ast
+  #    - CONPOT_TMP=/tmp/conpot
+  #   tmpfs:
+  #    - /tmp/conpot:uid=2000,gid=2000
+  #   networks:
+  #    - conpot_local_guardian_ast
+  #   ports:
+  #    - "10001:10001"
+  #   image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
 
 # Conpot ipmi
-  conpot_ipmi:
-    container_name: conpot_ipmi
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    environment:
-     - CONPOT_CONFIG=/etc/conpot/conpot.cfg
-     - CONPOT_JSON_LOG=/var/log/conpot/conpot_ipmi.json
-     - CONPOT_LOG=/var/log/conpot/conpot_ipmi.log
-     - CONPOT_TEMPLATE=ipmi
-     - CONPOT_TMP=/tmp/conpot
-    tmpfs:
-     - /tmp/conpot:uid=2000,gid=2000
-    networks:
-     - conpot_local_ipmi
-    ports:
-     - "623:623/udp"
-    image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-     - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
+  # conpot_ipmi:
+  #   container_name: conpot_ipmi
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   environment:
+  #    - CONPOT_CONFIG=/etc/conpot/conpot.cfg
+  #    - CONPOT_JSON_LOG=/var/log/conpot/conpot_ipmi.json
+  #    - CONPOT_LOG=/var/log/conpot/conpot_ipmi.log
+  #    - CONPOT_TEMPLATE=ipmi
+  #    - CONPOT_TMP=/tmp/conpot
+  #   tmpfs:
+  #    - /tmp/conpot:uid=2000,gid=2000
+  #   networks:
+  #    - conpot_local_ipmi
+  #   ports:
+  #    - "623:623/udp"
+  #   image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
 
 # Conpot kamstrup_382
-  conpot_kamstrup_382:
-    container_name: conpot_kamstrup_382
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    environment:
-     - CONPOT_CONFIG=/etc/conpot/conpot.cfg
-     - CONPOT_JSON_LOG=/var/log/conpot/conpot_kamstrup_382.json
-     - CONPOT_LOG=/var/log/conpot/conpot_kamstrup_382.log
-     - CONPOT_TEMPLATE=kamstrup_382
-     - CONPOT_TMP=/tmp/conpot
-    tmpfs:
-     - /tmp/conpot:uid=2000,gid=2000
-    networks:
-     - conpot_local_kamstrup_382
-    ports:
-     - "1025:1025"
-     - "50100:50100"
-    image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-     - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
+  # conpot_kamstrup_382:
+  #   container_name: conpot_kamstrup_382
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   environment:
+  #    - CONPOT_CONFIG=/etc/conpot/conpot.cfg
+  #    - CONPOT_JSON_LOG=/var/log/conpot/conpot_kamstrup_382.json
+  #    - CONPOT_LOG=/var/log/conpot/conpot_kamstrup_382.log
+  #    - CONPOT_TEMPLATE=kamstrup_382
+  #    - CONPOT_TMP=/tmp/conpot
+  #   tmpfs:
+  #    - /tmp/conpot:uid=2000,gid=2000
+  #   networks:
+  #    - conpot_local_kamstrup_382
+  #   ports:
+  #    - "1025:1025"
+  #    - "50100:50100"
+  #   image: ${TPOT_REPO}/conpot:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}/conpot/log:/var/log/conpot
 
 # Cowrie service
   cowrie:
@@ -430,21 +430,21 @@ services:
      - ${TPOT_DATA_PATH}/mailoney/log:/opt/mailoney/logs
 
 # Medpot service
-  medpot:
-    container_name: medpot
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    networks:
-     - medpot_local
-    ports:
-     - "2575:2575"
-    image: ${TPOT_REPO}/medpot:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-     - ${TPOT_DATA_PATH}/medpot/log/:/var/log/medpot
+  # medpot:
+  #   container_name: medpot
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   networks:
+  #    - medpot_local
+  #   ports:
+  #    - "2575:2575"
+  #   image: ${TPOT_REPO}/medpot:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}/medpot/log/:/var/log/medpot
 
 # Miniprint service
   miniprint:
@@ -785,28 +785,28 @@ services:
 #### /ELK
 
 # Ewsposter service
-  ewsposter:
-    container_name: ewsposter
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    networks:
-     - ewsposter_local
-    environment:
-     - EWS_HPFEEDS_ENABLE=false
-     - EWS_HPFEEDS_HOST=host
-     - EWS_HPFEEDS_PORT=port
-     - EWS_HPFEEDS_CHANNELS=channels
-     - EWS_HPFEEDS_IDENT=user
-     - EWS_HPFEEDS_SECRET=secret
-     - EWS_HPFEEDS_TLSCERT=false
-     - EWS_HPFEEDS_FORMAT=json
-    image: ${TPOT_REPO}/ewsposter:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    volumes:
-     - ${TPOT_DATA_PATH}:/data
-     - ${TPOT_DATA_PATH}/ews/conf/ews.ip:/opt/ewsposter/ews.ip
+  # ewsposter:
+  #   container_name: ewsposter
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   networks:
+  #    - ewsposter_local
+  #   environment:
+  #    - EWS_HPFEEDS_ENABLE=false
+  #    - EWS_HPFEEDS_HOST=host
+  #    - EWS_HPFEEDS_PORT=port
+  #    - EWS_HPFEEDS_CHANNELS=channels
+  #    - EWS_HPFEEDS_IDENT=user
+  #    - EWS_HPFEEDS_SECRET=secret
+  #    - EWS_HPFEEDS_TLSCERT=false
+  #    - EWS_HPFEEDS_FORMAT=json
+  #   image: ${TPOT_REPO}/ewsposter:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   volumes:
+  #    - ${TPOT_DATA_PATH}:/data
+  #    - ${TPOT_DATA_PATH}/ews/conf/ews.ip:/opt/ewsposter/ews.ip
 
 # Nginx service
   nginx:
